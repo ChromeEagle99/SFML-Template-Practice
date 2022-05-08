@@ -19,6 +19,12 @@
     <Filter Include="Source Files\GameState">
       <UniqueIdentifier>{2e172250-bd71-4981-8a6e-42d8be34a430}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Collision">
+      <UniqueIdentifier>{d9cdd896-f62a-48e8-a1a8-d140c3da47ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Collision">
+      <UniqueIdentifier>{dcb9637f-1a55-4e22-af5f-d33d9aa2758c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -29,6 +35,9 @@
     </ClCompile>
     <ClCompile Include="GameState\Scene1.cpp">
       <Filter>Source Files\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="AABB.cpp">
+      <Filter>Source Files\Collision</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -43,6 +52,9 @@
     </ClInclude>
     <ClInclude Include="main.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AABB.h">
+      <Filter>Header Files\Collision</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

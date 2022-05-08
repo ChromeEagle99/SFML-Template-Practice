@@ -5,6 +5,7 @@
 
 float g_dt;
 sf::RenderWindow* window;
+sf::Event* env;
 
 int main()
 {
@@ -51,6 +52,7 @@ int main()
 		while (GSM_current == GSM_next)
 		{
             sf::Event event;
+            env = &event;
             while (window->pollEvent(event))
             {
                 if (event.type == sf::Event::Closed)  GSM_next = GS_QUIT;
