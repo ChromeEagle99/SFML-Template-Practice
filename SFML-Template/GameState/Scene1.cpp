@@ -8,19 +8,25 @@
 struct Node 
 {
 	sf::RectangleShape* rect;
-	bool isClicked;
+	bool isObstacle;
 	int index;
+	bool start;
+	bool end;
 };
 
-bool mousePressed = false;
-//std::vector<sf::RectangleShape*> rectangleVector;
+bool keyPressed = false;
 std::vector<Node*> rectangleVector;
 float size;
 size_t grid_size;
+int vectorIndex = 0;
+bool isStartPlaced = false;
+bool isEndPlaced = false;
+
+
 void scene1_load()
 {
 	//std::cout << "Scene 1 Load" << std::endl;
-	int index = 0;
+	
 	
 	grid_size = 30;
 	size = window->getSize().x / grid_size;
@@ -28,9 +34,11 @@ void scene1_load()
 	{
 		for (size_t col = 0; col < grid_size; col++)
 		{
-			index = (row + 1 )* (col + 1);
+			vectorIndex = (row + 1 )* (col + 1);
 			Node* node = new Node();
-			node->isClicked= false;
+			node->isObstacle= false;
+			node->start= false;
+			node->end= false;
 
 			sf::RectangleShape* rect = new sf::RectangleShape();
 			rect->setSize({ size,size });
@@ -41,11 +49,11 @@ void scene1_load()
 
 
 			node->rect = rect;
-			node->index = index;
+			node->index = vectorIndex;
 			rectangleVector.push_back(node);
 		}
 	}
-	std::cout << "Rectangles created: " << index << std::endl;
+	std::cout << "Rectangles created: " << vectorIndex << std::endl;
 }
 void scene1_init()
 {
@@ -60,31 +68,41 @@ void scene1_update()
 	int yIndex = mousePosition.y / size;
 
 	int index = xIndex + (grid_size * yIndex);
+	if (index < 0) index = 0;
+	if (index >= vectorIndex) index = vectorIndex;
 
 
-	if (env->type == sf::Event::MouseButtonPressed) 
+
+	if (!rectangleVector[index]->isObstacle) 
 	{
-		if (env->mouseButton.button == sf::Mouse::Left)
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 		{
-			std::cout << "aaaa" << std::endl;
-			rectangleVector[index]->isClicked = !rectangleVector[index]->isClicked;
-			rectangleVector[index]->isClicked = true;
+			if (!isStartPlaced && !rectangleVector[index]->start)
+			{
+				rectangleVector[index]->start = true;
+				isStartPlaced = true;
+			}
 		}
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+		{
+			if (!isEndPlaced && !rectangleVector[index]->end)
+			{
+				rectangleVector[index]->end = true;
+				isEndPlaced = true;
+			}
+		}	
 	}
 
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !rectangleVector[index]->start && !rectangleVector[index]->end)
+	{
+		rectangleVector[index]->isObstacle = true;
+	}
 
-	//if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !mousePressed)
-	//{
-	//	mousePressed = true;
-	//	std::cout << "aaaa" << std::endl;
-	//	rectangleVector[index]->isClicked = !rectangleVector[index]->isClicked;
-	//}
-	//else if (!sf::Mouse::isButtonPressed(sf::Mouse::Left))
-	//{
-	//	std::cout << "wwwwwwwwwwww" << std::endl;
-
-	//	mousePressed = false;
-	//}
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && !rectangleVector[index]->start && !rectangleVector[index]->end)
+	{
+		rectangleVector[index]->isObstacle = false;
+	}
 
 	for (size_t i = 0; i < rectangleVector.size(); i++)
 	{
@@ -94,36 +112,25 @@ void scene1_update()
 				rectangleVector[i]->rect->getSize().y);
 
 
-		//if (pointVsRectCheck(mousePosition.x, mousePosition.y, box))
-		//{
-		//	//std::cout << "aa" << std::endl;
+		rectangleVector[i]->rect->setFillColor(sf::Color(0xD3D3D3FF));
 
-		//	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && !mousePressed)
-		//	{
-		//		mousePressed = true;
-		//		std::cout << "x: " << mousePosition.x << std::endl;
-		//		std::cout << "y: " << mousePosition.y << std::endl;
 
-		//		rectangleVector[i]->isClicked = !rectangleVector[i]->isClicked;
-
-		//	}
-		//}
-
-		if (rectangleVector[i]->isClicked)
+		if (rectangleVector[i]->isObstacle)
 		{
 			rectangleVector[i]->rect->setFillColor(sf::Color(0x565656FF));
+			continue;
 		}
-		else
-		{
-			rectangleVector[i]->rect->setFillColor(sf::Color(0xD3D3D3FF));
-		}
+
+
+		if (rectangleVector[i]->start)
+			rectangleVector[i]->rect->setFillColor(sf::Color(0xFF0000FF));
+		else if (rectangleVector[i]->end)
+			rectangleVector[i]->rect->setFillColor(sf::Color(0x0000FFFF));
 
 		if (pointVsRectCheck(mousePosition.x, mousePosition.y, box))
 		{
 			rectangleVector[i]->rect->setFillColor(sf::Color(0xFF0000FF));
 		}
-
-		mousePressed = false;
 	}
 
 }
@@ -132,7 +139,6 @@ void scene1_draw()
 	//std::cout << "Scene 1 Draw" << std::endl;
 	for (size_t i = 0; i < rectangleVector.size(); i++)
 	{
-		//window.draw
 		window->draw(*rectangleVector[i]->rect);
 	}
 	//std::cout << rectangleVector.size() << std::endl;

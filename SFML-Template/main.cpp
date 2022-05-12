@@ -18,7 +18,7 @@ int main()
     sf::RenderWindow w(sf::VideoMode(windowWidth, windowHeight), windowTitle, sf::Style::Close | sf::Style::Titlebar);
     window = &w;
     sf::Clock deltaClock;
-
+    w.setKeyRepeatEnabled(false);
     //unsigned int gridWidth = 100;
     //unsigned int gridHeight = 100;
 
