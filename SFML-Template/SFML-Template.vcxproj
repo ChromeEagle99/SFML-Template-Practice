@@ -146,16 +146,23 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AABB.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="GameStateManager.cpp" />
     <ClCompile Include="GameState\Scene1.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="TextBox.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AABB.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="GameStateList.h" />
     <ClInclude Include="GameStateManager.h" />
     <ClInclude Include="GameState\Scene1.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="TextBox.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Assets\Font\arial.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

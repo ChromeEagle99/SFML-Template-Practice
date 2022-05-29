@@ -25,6 +25,18 @@
     <Filter Include="Header Files\Collision">
       <UniqueIdentifier>{dcb9637f-1a55-4e22-af5f-d33d9aa2758c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameObject">
+      <UniqueIdentifier>{c73d6191-4efe-4e8a-a5d2-63ce2c03cce1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameObject">
+      <UniqueIdentifier>{6135bd73-75cb-4cb7-b27d-52f38cc1d454}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Assets">
+      <UniqueIdentifier>{28023f20-c69c-4e6e-91ce-b2e2834256d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Assets\Fonts">
+      <UniqueIdentifier>{a37c1682-97af-4823-9f62-46c9dca946b8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -38,6 +50,12 @@
     </ClCompile>
     <ClCompile Include="AABB.cpp">
       <Filter>Source Files\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TextBox.cpp">
+      <Filter>Source Files\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -56,5 +74,16 @@
     <ClInclude Include="AABB.h">
       <Filter>Header Files\Collision</Filter>
     </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="TextBox.h">
+      <Filter>Header Files\GameObject</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="Assets\Font\arial.ttf">
+      <Filter>Resource Files\Assets\Fonts</Filter>
+    </Font>
   </ItemGroup>
 </Project>
